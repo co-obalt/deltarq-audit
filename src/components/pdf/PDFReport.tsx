@@ -13,6 +13,7 @@ import {
   Link,
 } from '@react-pdf/renderer';
 import { RemediationModule } from '@/data/remediationModules';
+import deLogo from '../../deltarq-logo.png';
 
 // Constants
 const EMERALD = '#10B981';
@@ -428,7 +429,7 @@ const GaugeSVG = ({ score }: { score: number }) => {
 const PageHeader = ({ pageType, framework }: { pageType: string, framework: string }) => (
   <View style={styles.header} fixed>
     <Image
-      src="c:\Users\game\OneDrive\Desktop\Project\src\deltarq-logo.png"
+      src={deLogo}
       style={styles.headerLogo}
     />
     <View style={styles.headerInfo}>
@@ -486,7 +487,7 @@ export const PDFReport: React.FC<PDFReportProps> = ({
 
         <View style={styles.coverContent}>
           <Image
-            src="c:\Users\game\OneDrive\Desktop\Project\src\deltarq-logo.png"
+            src={deLogo}
             style={styles.coverLogo}
           />
           <Text style={styles.mainTitle}>Security Readiness Report</Text>

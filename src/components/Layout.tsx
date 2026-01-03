@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import StepIndicator from './StepIndicator';
+import logo from '../logo.png';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ children, className, currentStep, heade
           <div className="w-auto flex justify-start z-50">
             {headerLeft || (
               <div className="flex items-center gap-4 cursor-pointer" onClick={() => window.location.href = '/'}>
-                <img src="/src/logo.png" alt="DeltaRQ Logo" className="h-8 md:h-9 w-auto object-contain" />
+                <img src={logo} alt="DeltaRQ Logo" className="h-8 md:h-9 w-auto object-contain" />
                 <span className="text-[14px] font-black uppercase tracking-[0.2em] text-white">Deltarq</span>
               </div>
             )}
@@ -53,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children, className, currentStep, heade
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-2">
             <div className="flex items-center gap-4 mb-4">
-              <img src="/src/logo.png" alt="DeltaRQ" className="h-6 w-auto object-contain" />
+              <img src={logo} alt="DeltaRQ" className="h-6 w-auto object-contain" />
               <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">Deltarq</span>
             </div>
             <p className="text-[11px] text-muted-foreground/40 font-bold tracking-widest uppercase">

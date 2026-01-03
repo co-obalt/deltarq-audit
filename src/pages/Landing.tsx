@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Zap
 } from 'lucide-react';
+import samplePdf from '../alphatech-DeltaRQ-Full-Report.pdf';
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
@@ -168,7 +169,7 @@ const Landing: React.FC = () => {
                 variant="ghost"
                 onClick={() => {
                   const link = document.createElement('a');
-                  link.href = '/src/alphatech-DeltaRQ-Full-Report.pdf';
+                  link.href = samplePdf;
                   link.download = 'DeltaRQ-Global-Report-Sample.pdf';
                   link.click();
                 }}
