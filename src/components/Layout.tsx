@@ -15,7 +15,13 @@ const Layout: React.FC<LayoutProps> = ({ children, className, currentStep, heade
   return (
     <div className={cn("min-h-screen flex flex-col bg-[#0A0A0A]", className)}>
       {/* 1. TRUST HEADER (TOP NOTIFICATION BAR) */}
-      <div className="fixed top-0 w-full z-[110] bg-[#0A0A0A] border-b border-white/5 h-10 flex items-center justify-center">
+      <div className="fixed top-0 w-full z-[110] bg-[#0A0A0A] border-b border-white/5 h-10 flex items-center justify-center gap-3">
+        <div className="flex items-center gap-2">
+          {/* Emerald Dot: System Active */}
+          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-status-pulse-gentle" />
+          {/* Red Dot: Live Scans */}
+          <div className="w-2 h-2 rounded-full bg-rose-500 animate-status-blink-sharp" />
+        </div>
         <p className="text-[13px] font-medium text-emerald-400 tracking-wide">
           Join 142+ founders closing enterprise deals faster with DeltaRQ.
         </p>

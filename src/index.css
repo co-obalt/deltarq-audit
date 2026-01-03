@@ -306,6 +306,38 @@
       filter: brightness(1.1);
     }
   }
+
+  @keyframes pulse-gentle {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .animate-status-pulse-gentle {
+    animation: pulse-gentle 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink-sharp {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .animate-status-blink-sharp {
+    animation: blink-sharp 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }
 
 @layer utilities {
