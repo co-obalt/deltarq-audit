@@ -84,7 +84,8 @@ const Landing: React.FC = () => {
                   companyName: data.company_name || '',
                   industry: data.industry || '',
                   role: data.user_role || '',
-                  dealSize: Number(data.deal_size) || 25000
+                  dealSize: Number(data.deal_size) || 50000,
+                  phone: data.phone || ''
                 },
                 email: data.email || '',
                 answers: data.answers || Array(15).fill(null),

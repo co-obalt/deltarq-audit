@@ -516,33 +516,47 @@ export const PDFReport: React.FC<PDFReportProps> = ({
       </Page>
 
       {/* -------------------- PAGE 2: REVENUE RISK & TOP GAPS -------------------- */}
-      <Page size="A4" style={styles.page}>
-        <PageHeader pageType="Executive Summary" framework={framework} />
+      {sortedGaps.length > 0 && (
+        <Page size="A4" style={styles.page}>
+          <PageHeader pageType="Executive Summary" framework={framework} />
 
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Pipeline Vulnerability Analysis</Text>
-        </View>
-
-        <View style={{ marginBottom: 30 }}>
-          <Text style={{ fontSize: 11, color: SLATE_600, lineHeight: 1.6 }}>
-            The following infrastructure failures represent immediate deal-breakers for Enterprise InfoSec teams.
-            Estimated pipeline impact is based on a projected average deal size of ${dealSize.toLocaleString()}.
-          </Text>
-        </View>
-
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Top 3 Priority Deficiencies</Text>
-        </View>
-
-        {sortedGaps.slice(0, 3).map((gap, idx) => (
-          <View key={idx} style={styles.gapItem}>
-            <Text style={styles.gapTitle}>{idx + 1}. {gap.title}</Text>
-            <Text style={styles.gapDescription}>{gap.auditorPerspective.concern}</Text>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Pipeline Vulnerability Analysis</Text>
           </View>
-        ))}
 
-        <CommonFooter pageNumber={2} />
-      </Page>
+          <View style={{ marginBottom: 30 }}>
+            <Text style={{ fontSize: 11, color: SLATE_600, lineHeight: 1.6 }}>
+              The following infrastructure failures represent immediate deal-breakers for Enterprise InfoSec teams.
+              Estimated pipeline impact is based on a projected average deal size of ${dealSize.toLocaleString()}.
+            </Text>
+          </View>
+
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Top 3 Priority Deficiencies</Text>
+          </View>
+
+          {sortedGaps.slice(0, 3).map((gap, idx) => (
+            <View key={idx} style={styles.gapItem} wrap={false}>
+              <Text style={styles.gapTitle}>{idx + 1}. {gap.title}</Text>
+              <Text style={[styles.gapDescription, { marginBottom: 8 }]}>{gap.auditorPerspective.concern}</Text>
+
+              {/* Added Remediation Section as requested */}
+              <View style={{ marginTop: 8, padding: 8, backgroundColor: 'rgba(16, 185, 129, 0.1)', borderRadius: 4, borderLeftWidth: 2, borderLeftColor: EMERALD }}>
+                <Text style={{ fontSize: 9, fontWeight: 'bold', color: EMERALD, marginBottom: 2 }}>SUGGESTED REMEDIATION:</Text>
+                <Text style={{ fontSize: 9, color: SLATE_600 }}>{gap.technicalFix.solution}</Text>
+              </View>
+            </View>
+          ))}
+
+          <View style={{ marginTop: 20, padding: 15, backgroundColor: '#F8FAFC', borderRadius: 8, borderWidth: 1, borderColor: '#E2E8F0', alignItems: 'center' }}>
+            <Text style={{ fontSize: 10, fontStyle: 'italic', color: SLATE_600, textAlign: 'center' }}>
+              * This is a preview of the top critical gaps. Purchase the full report for a complete deep-dive analysis and comprehensive 90-day engineering roadmap.
+            </Text>
+          </View>
+
+          <CommonFooter pageNumber={2} />
+        </Page>
+      )}
 
       {/* -------------------- PAGE 3: TIERED CTA -------------------- */}
       <Page size="A4" style={styles.page}>

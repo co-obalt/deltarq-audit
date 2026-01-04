@@ -9,6 +9,7 @@ export interface CompanyInfo {
   industry: string;
   role: string;
   dealSize: number;
+  phone?: string;
 }
 
 export interface AssessmentState {
@@ -46,7 +47,8 @@ export const initialState: AssessmentState = {
     companyName: '',
     industry: '',
     role: '',
-    dealSize: 25000
+    dealSize: 50000,
+    phone: ''
   },
   email: '',
   answers: Array(15).fill(null),
@@ -126,11 +128,14 @@ export const AssessmentProvider: React.FC<{ children: ReactNode }> = ({ children
         user_role: dataToSync.companyInfo.role,
         deal_size: dataToSync.companyInfo.dealSize,
         email: dataToSync.email,
+        phone: dataToSync.companyInfo.phone,
         readiness_score: calculateScore(dataToSync.answers),
         answers: dataToSync.answers,
         ip_address: dataToSync.ip_address,
         framework: dataToSync.framework
       };
+
+      if (import.meta.env.DEV) console.log('Syncing Phone:', dataToSync.companyInfo.phone);
 
 
       const { error } = await supabase

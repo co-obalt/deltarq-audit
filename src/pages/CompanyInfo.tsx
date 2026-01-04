@@ -29,10 +29,10 @@ const roles = [
 ];
 
 const dealSizeLabels: Record<number, string> = {
-  10000: '$10k',
-  25000: '$25k',
   50000: '$50k',
-  100000: '$100k+'
+  100000: '$100k',
+  250000: '$250k',
+  500000: '$500k+'
 };
 
 const CompanyInfo: React.FC = () => {
@@ -42,27 +42,40 @@ const CompanyInfo: React.FC = () => {
   const [companyName, setCompanyName] = useState('');
   const [industry, setIndustry] = useState('');
   const [role, setRole] = useState('');
-  const [dealSize, setDealSize] = useState(25000);
+  const [phone, setPhone] = useState('');
+  const [email, setEmailState] = useState(state.email || ''); // Initial state from context
+  const [dealSize, setDealSize] = useState(50000);
   const [isSliding, setIsSliding] = useState(false);
 
-  const isValid = companyName.trim() && industry && role;
+  // Strict Validation Regex
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 standard roughly (allows + and digits) or just simple strict digits: /^\+?[0-9]{10,15}$/
+  // User asked for "no random words". Let's stick to a solid phone check.
+  // Using a slightly more flexible but strict enough regex:
+  const strictPhoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+
+  const isEmailValid = emailRegex.test(email);
+  const isPhoneValid = strictPhoneRegex.test(phone) && phone.length >= 10;
+
+  const isValid = companyName.trim().length > 1 && industry && role && isEmailValid && isPhoneValid;
 
   const handleContinue = () => {
     if (isValid) {
-      setCompanyInfo({ companyName, industry, role, dealSize });
-      syncAuditToSupabase(); // Final sync before next step
+      setEmail(email); // Update context with validated email
+      setCompanyInfo({ companyName, industry, role, dealSize, phone });
+      syncAuditToSupabase();
       navigate('/questions');
     }
   };
 
   const getDealSizeValue = (value: number): number => {
-    const sizes = [10000, 25000, 50000, 100000];
+    const sizes = [50000, 100000, 250000, 500000];
     return sizes.indexOf(value);
   };
 
   const getDealSizeFromIndex = (index: number): number => {
-    const sizes = [10000, 25000, 50000, 100000];
-    return sizes[index] || 25000;
+    const sizes = [50000, 100000, 250000, 500000];
+    return sizes[index] || 50000;
   };
 
   return (
@@ -82,7 +95,7 @@ const CompanyInfo: React.FC = () => {
           <div className="glass-card p-8 md:p-10 space-y-8 animate-fade-in shadow-2xl" style={{ animationDelay: '100ms' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Company Name */}
-              <div className="space-y-3">
+              <div className="space-y-3 md:col-span-2">
                 <Label htmlFor="company" className="text-base font-semibold">Company Name</Label>
                 <Input
                   id="company"
@@ -95,17 +108,45 @@ const CompanyInfo: React.FC = () => {
 
               {/* Email Capture (Highest Priority Lead) */}
               <div className="space-y-3">
-                <Label htmlFor="email" className="text-base font-semibold">Business Email</Label>
+                <div className="flex justify-between">
+                  <Label htmlFor="email" className="text-base font-semibold">Business Email</Label>
+                  {email && !isEmailValid && <span className="text-xs text-rose-500 font-medium self-center">Invalid email</span>}
+                </div>
                 <Input
                   id="email"
                   type="email"
                   placeholder="name@company.com"
-                  defaultValue={state.email}
-                  onBlur={(e) => {
-                    setEmail(e.target.value);
-                    syncAuditToSupabase(); // Instant sync on blur
+                  value={email}
+                  onChange={(e) => setEmailState(e.target.value)}
+                  onBlur={() => {
+                    if (isEmailValid) {
+                      setEmail(email);
+                      syncAuditToSupabase();
+                    }
                   }}
-                  className="h-12 bg-secondary/30 border-border/50 focus:ring-primary/20 transition-all text-base"
+                  className={cn(
+                    "h-12 bg-secondary/30 border-border/50 focus:ring-primary/20 transition-all text-base",
+                    email && !isEmailValid && "border-rose-500/50 focus:ring-rose-500/20"
+                  )}
+                />
+              </div>
+
+              {/* Phone Number */}
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <Label htmlFor="phone" className="text-base font-semibold">Phone Number</Label>
+                  {phone && !isPhoneValid && <span className="text-xs text-rose-500 font-medium self-center">Invalid number</span>}
+                </div>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+1 (555) 000-0000"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className={cn(
+                    "h-12 bg-secondary/30 border-border/50 focus:ring-primary/20 transition-all text-base",
+                    phone && !isPhoneValid && "border-rose-500/50 focus:ring-rose-500/20"
+                  )}
                 />
               </div>
 
@@ -170,10 +211,10 @@ const CompanyInfo: React.FC = () => {
                   className="py-4 cursor-pointer"
                 />
                 <div className="flex justify-between text-xs font-semibold text-muted-foreground/60 mt-2 px-1">
-                  <span>$10k</span>
-                  <span>$25k</span>
                   <span>$50k</span>
-                  <span>$100k+</span>
+                  <span>$100k</span>
+                  <span>$250k</span>
+                  <span>$500k+</span>
                 </div>
               </div>
             </div>
