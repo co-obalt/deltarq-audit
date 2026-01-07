@@ -294,7 +294,7 @@ const Score: React.FC = () => {
               </Button>
             </div>
 
-            {/* Remediation Blueprint (Paid) */}
+            {/* Remediation Blueprint (Limited Free This Week) */}
             <div className="glass-card bg-emerald-500/[0.03] border border-emerald-500/20 rounded-[32px] p-10 flex flex-col h-full relative group hover:bg-emerald-500/[0.05] hover:border-emerald-500/40 transition-all shadow-[0_0_80px_rgba(16,185,129,0.05)]">
               {/* Expert Choice Badge */}
               <div className="absolute top-6 right-6 px-4 py-1.5 rounded-full bg-emerald-500 text-[#0A0A0A] text-[9px] font-black uppercase tracking-widest shadow-lg transform rotate-3">
@@ -305,8 +305,10 @@ const Score: React.FC = () => {
                 <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-8 border border-emerald-500/20 text-emerald-500 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(16,185,129,0.2)]">
                   <Crown className="w-8 h-8" />
                 </div>
-                <h3 className="text-[24px] font-bold text-emerald-500 mb-2">Full Remediation Blueprint ($49)</h3>
-                <p className="text-emerald-500/60 font-black text-[11px] uppercase tracking-widest leading-none">The Complete Solution</p>
+                <h3 className="text-[24px] font-bold text-emerald-500 mb-2">Remediation Blueprint (Limited Free)</h3>
+                <p className="text-emerald-500/60 font-black text-[11px] uppercase tracking-widest leading-none">
+                  Helping 10 founders for FREE this week
+                </p>
               </div>
 
               <ul className="space-y-6 mb-12 flex-grow">
@@ -320,7 +322,9 @@ const Score: React.FC = () => {
                     <div className="mt-1 shrink-0">
                       <ShieldCheck className="w-5 h-5 text-emerald-500" />
                     </div>
-                    <span className="text-[14px] font-medium text-white/90 leading-[1.6] font-inter">{point}</span>
+                    <span className="text-[14px] font-medium text-white/90 leading-[1.6] font-inter">
+                      {point}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -330,9 +334,10 @@ const Score: React.FC = () => {
                 disabled={isGenerating}
                 className="w-full h-16 text-[14px] font-black uppercase tracking-widest rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-[#0A0A0A] shadow-[0_20px_40px_rgba(16,185,129,0.2)] transition-all border-b-4 border-emerald-700 active:border-b-0 active:translate-y-1"
               >
-                {isGenerating ? <Loader2 className="animate-spin" /> : "UNLOCK FULL BLUEPRINT (49$)"}
+                {isGenerating ? <Loader2 className="animate-spin" /> : "CLAIM FREE SPOT (7 Left)"}
               </Button>
             </div>
+
           </div>
 
           {/* Audit Readiness Concierge (High-Touch Service) */}
