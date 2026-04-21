@@ -1,49 +1,52 @@
-# DeltaRQ - Enterprise Deal-Readiness Audit
+# DeltaRQ Audit Tool – Enterprise Deal Readiness Scanner
 
-**Close enterprise deals faster.**
-DeltaRQ is a technical deep-dive tool designed to identify SOC 2, HIPAA, and ISO 27001 compliance gaps that stall enterprise sales.
+DeltaRQ Audit is a web-based assessment tool designed to help startups identify compliance gaps that slow down enterprise deals.
 
-## Project Structure
+It simulates a structured security and compliance evaluation aligned with frameworks like SOC 2, ISO 27001, and HIPAA, and provides actionable insights in minutes.
 
-- **Frontend**: React, Vite, Tailwind CSS, Shadcn UI
-- **PDF Generation**: @react-pdf/renderer
-- **State Management**: React Context, LocalStorage
-- **Backend Sync**: Supabase
+---
 
-## Getting Started
+## 🚀 Live Demo
+https://deltarq-audit.vercel.app
 
-### Prerequisites
+---
 
-- Node.js & npm installed
+## 🧠 Core Idea
 
-### Installation
+Early-stage startups often lose or delay enterprise deals due to weak security posture or missing compliance readiness.
 
-```sh
-# 1. Clone the repository
-git clone <YOUR_GIT_URL>
+This tool provides:
+- A quick technical audit
+- A readiness score
+- A structured report highlighting gaps and next steps
 
-# 2. Install dependencies
-npm install
+---
 
-# 3. Start development server
-npm run dev
-```
+## ⚙️ Features
 
-## Features
+- Interactive compliance questionnaire
+- Real-time readiness scoring system
+- Multi-framework support (SOC 2, ISO 27001, HIPAA)
+- Auto-generated PDF report with gap analysis
+- Lead capture and tracking (Supabase integration)
 
-- **Readiness Audit**: Interactive questionnaire to assess compliance posture.
-- **Score Calculation**: Real-time scoring algorithm based on framework selection (SOC 2, ISO 27001, HIPAA).
-- **PDF Reports**: Auto-generated PDF reports with gap analysis and remediation roadmaps.
-- **Lead Capture**: Integration with Supabase for lead tracking.
+---
 
-## Deployment
+## 🛠 Tech Stack
 
-Build the project for production:
+- Frontend: React + Vite + Tailwind + Shadcn UI
+- State: React Context + LocalStorage
+- Backend / Data: Supabase
+- PDF Engine: @react-pdf/renderer
 
-```sh
-npm run build
-```
+---
 
-## License
+## 📌 Status
 
-Confidential & Proprietary. © 2026 DeltaRQ. All rights reserved.
+Actively evolving as part of the DeltaRQ platform.
+
+---
+
+## 📄 License
+
+Proprietary – © 2026 DeltaRQ
