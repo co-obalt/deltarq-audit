@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────
+   DESIGN TOKENS  —  Stripe / Linear aesthetic
+   ───────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Neutral backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 6%;
+
+    /* Brand — muted violet, not neon blue */
+    --primary: 258 78% 48%;           /* #5d32e0 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input:  220 13% 91%;
+    --ring:   258 78% 48%;
+
+    --radius: 0.875rem;
+
+    --success: 158 64% 36%;
+    --warning: 35 91% 46%;
+    --critical: 0 72% 51%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   BASE STYLES
+   ───────────────────────────────────────────────────── */
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    @apply bg-white text-slate-900 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, .font-display {
+    font-family: 'Outfit', system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  code, .mono, pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   COMPONENT SYSTEM
+   ───────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Page Background ───────────────────────────────── */
+  .page-bg {
+    background: #ffffff;
+  }
+
+  .page-bg-subtle {
+    background: #fafafa;
+  }
+
+  /* ── Standard Card ─────────────────────────────────── */
+  .card {
+    @apply bg-white rounded-2xl border border-slate-200/80 transition-all duration-200;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+
+  .card:hover {
+    @apply border-slate-300/80;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+
+  /* keep old alias */
+  .premium-card { @apply card; }
+  .geo-card     { @apply card; }
+
+  /* ── Primary Button — violet, no neon ─────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-white rounded-xl transition-all duration-200;
+    background: #5d32e0;
+    box-shadow: 0 1px 2px rgba(93,50,224,0.2), 0 4px 8px rgba(93,50,224,0.15);
+    height: 3rem;
+    padding: 0 1.5rem;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+  }
+
+  .btn-primary:hover {
+    background: #4f2bcb;
+    box-shadow: 0 2px 4px rgba(93,50,224,0.25), 0 8px 20px rgba(93,50,224,0.2);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(93,50,224,0.2);
+  }
+
+  .btn-primary:disabled {
+    background: #e2e8f0;
+    color: #94a3b8;
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  /* ── Ghost / Outline Button ────────────────────────── */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 font-semibold text-slate-600 rounded-xl border border-slate-200 bg-white transition-all duration-200;
+    height: 3rem;
+    padding: 0 1.5rem;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-slate-50 border-slate-300 text-slate-800;
+  }
+
+  /* ── Text Gradient — muted violet, not electric ────── */
+  .text-brand {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #5d32e0 0%, #8b5cf6 100%);
+  }
+
+  .text-danger {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #dc2626 0%, #e11d48 100%);
+  }
+
+  /* ── Section Heading Utility ───────────────────────── */
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-400;
+  }
+
+  /* ── Score Colors ──────────────────────────────────── */
+  .score-critical { @apply text-red-600; }
+  .score-moderate { @apply text-amber-600; }
+  .score-healthy  { @apply text-emerald-600; }
+
+  /* ── Input Focus ───────────────────────────────────── */
+  .input-focus {
+    @apply transition-all duration-150;
+  }
+  .input-focus:focus {
+    outline: none;
+    @apply ring-2 ring-violet-500/15 border-violet-400/60;
+  }
+
+  /* ── Custom Scrollbar ──────────────────────────────── */
+  .custom-scrollbar::-webkit-scrollbar       { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.2); border-radius: 4px; }
+
+  /* ── Status Dot ────────────────────────────────────── */
+  .dot-active {
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-emerald-500;
+    animation: dotPulse 2.4s ease-in-out infinite;
+  }
+
+  /* ── Divider ───────────────────────────────────────── */
+  .divider { @apply border-t border-slate-100; }
+}
+
+/* ─────────────────────────────────────────────────────
+   KEYFRAMES — subtle only, no floating/bouncing
+   ───────────────────────────────────────────────────── */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.anim-fade-up   { animation: fadeUp  0.5s ease-out both; }
+.anim-fade-in   { animation: fadeIn  0.4s ease-out both; }
+.anim-scale-in  { animation: scaleIn 0.4s ease-out both; }
+
+/* legacy aliases so old code keeps working */
+.animate-slide-up  { animation: fadeUp  0.5s ease-out both; }
+.animate-scale-in  { animation: scaleIn 0.4s ease-out both; }
+.animate-float     {} /* disabled — no float */
+.stripe-bg         { background: #fafafa; }
+.btn-gradient      { @apply btn-primary; }
+.text-gradient-indigo { @apply text-brand; }
+.text-gradient-emerald {
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(135deg, #059669 0%, #2563eb 100%);
+}
