@@ -1,0 +1,6 @@
+# DELTARQ AUDIT — Enterprise Deal-Readiness Audit Platform
+
+> AI-native enterprise security & deal-readiness audit platform. Unblock procurement, scan for SOC 2, HIPAA, and ISO 27001 compliance gaps instantly.
+
+## Briefs
+- [Developer Brief](https://deltarq-audit.vercel.app/llms.md)

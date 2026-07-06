@@ -12,3 +12,31 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms.md
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms.md
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms.md
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms.md
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms.md
+
+Sitemap: https://deltarq-audit.vercel.app/sitemap.xml

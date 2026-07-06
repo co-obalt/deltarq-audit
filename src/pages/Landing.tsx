@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import samplePdf from '../alphatech-DeltaRQ-Full-Report.pdf';
+import { FAQ } from '@/components/FAQ';
 
 /* ─────────────────────────────────────────────────────
    STATIC PRODUCT VISUAL — professional, no animation
@@ -410,6 +411,8 @@ const Landing: React.FC = () => {
             </div>
           </div>
         </section>
+
+        <FAQ />
       </div>
     </Layout>
   );
